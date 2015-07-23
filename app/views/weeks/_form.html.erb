@@ -1,0 +1,29 @@
+<%= form_for(@week, html: {role: 'form'}) do |f| %>
+  <% if @week.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@week.errors.count, "error") %> prohibited this week from being saved:</h2>
+
+      <ul>
+      <% @week.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+    <%= f.label :week_number %>
+    <%= f.number_field :week_number, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :season_id, "Season" %>
+    <%= f.select(:season_id, Season.order(:year).reverse.collect {|p| [ p.year, p.id ] }, { :include_blank => false }, class: 'form-control') %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Create Week", class: 'btn btn-primary btn-lg' %>
+  </div>
+  </div>
+</div>
+  
+<% end %>

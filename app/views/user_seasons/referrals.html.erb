@@ -1,0 +1,19 @@
+<h1 class="page-header">Referral Leaderboard for <%= Season.current_season.year %></h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Total referrals</th>
+        <th>Paid referrals</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @data.each do |d| %>
+      <tr>
+        <td><%= d[:full_name] %></td>
+        <td><%= d[:total_referral_count] %></td>
+        <td><%= d[:paid_referral_count] %></td>
+      </tr>
+     <% end %>
+    </tbody>
+  </table>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>THE NFL (Brett Favre Isn't Gonna) Survival Pool | The World's Premier NFL Survival Pool</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= yield :extra_css %>
+  <%= csrf_meta_tags %>
+  <meta content="description" name="For people who love football, play football, watch football, or know what football is; and for people who are none of those things but once received a camera phone picture from Brett Favre, this is the pool for you." />
+  <meta content="keywords" name="football,nfl,survival pool,picks,eliminator,elimination pool,suicide pool,pickem,darwinian football schedule analysis,justwinbaby" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="jWXBl1zulju4wKjGGJgvGlKqusljhp8U4xwkq5w37jI" />
+</head>
+<body>
+	<header class="navbar navbar-inverse navbar-static-top">
+		
+	<div class="container">
+		<div class="navbar-header">	
+			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+			</button>	
+			<a href="/" class="navbar-brand">B.F.I.G.</a>
+		</div>
+	<div class="navbar-collapse collapse">
+		<ul class="nav navbar-nav">
+			<% if current_user && current_user.verified == true %>
+				<li><a href="/pool-history">Pool History</a></li>
+				<li><a href="/rules">Rules</a></li>
+			<% end %>
+			<% if current_user.try(:is_admin) == 1 %>
+				<li><%= link_to "Commissioner's Portal", '/commissioners/index' %></li>
+				<li><%= link_to "Referral Leaderboard", '/referrals' %></li>
+			<% end %>
+			<% if current_user && current_user.could_sign_up_for_another_season? %>
+				<form class="navbar-form navbar-left" role="search">
+        		<%= link_to "Signup for #{Season.season_accepting_signups.year}", '/next-season/sign-up', :class => "btn btn-primary" %>
+      		</form>
+			<% end %>
+			<% if current_user && current_user.is_signed_up_for_next_season? %>
+				<form class="navbar-form navbar-left" role="search">
+					<%= link_to "You're signed up for #{Season.season_accepting_signups.year}", '#', :class => "btn btn-info disabled" %>
+				</form>
+			<% end %> 
+			
+
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<% if current_user %>
+			
+			<li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+				
+			<% else %>
+			<li><%= link_to "Sign in", new_user_session_path %></li>
+			<li><%= link_to "Sign up", new_user_registration_path %></li>
+			<% end %>
+		</ul>		
+	</div>
+
+			</div>
+	</header>
+	<div class="container">
+		<% if notice %>
+			<div class="alert alert-info" style="margin-bottom:30px;"><%= notice %></div>
+		<% end %>
+		<% if alert %>
+			<div class="alert alert-danger" style="margin-bottom:30px;"><%= alert %></div>
+		<% end %>
+		<%= yield %>
+	</div>
+
+	<div class="container">
+		<footer>
+			<p>&copy; The NBFIGSP Commish, 2009-2014</p>
+		</footer>
+	</div>
+	
+
+	<% if ENV['google_analytics_id'] %>
+    <!-- Google Analytics -->
+    <script>
+      var _gaq=[['_setAccount','<%= ENV['google_analytics_id'] %>'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+  <% end %>
+</body>
+</html>

@@ -1,0 +1,2 @@
+module UserSeasonsHelper
+end

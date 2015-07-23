@@ -1,0 +1,5 @@
+<li class="nav-header" style="font-weight:bold;font-size:16px; margin-top:15px;">Week <%= week.week_number %></li>
+	<li>Unique picks: <%= Pick.teams_picked_in_week_id(week.id).count %></li>
+	<li>Pool record: <%= Pick.cache_record_of_teams_picked_in_week_id(week.id) %></li>
+	<li>Knocked out: <%= Pick.cache_number_of_losses_in_week_id(week.id) %></li>        		
+	<li>Remaining: <%= Pick.cache_number_remaining_after_week_id(week.id) %></li>

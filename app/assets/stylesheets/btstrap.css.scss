@@ -1,0 +1,156 @@
+@import 'bootstrap';
+
+$wwidth: 1170px;
+// $wwidth: 920px;
+
+// .navbar .container {
+// 	width: $wwidth;
+// }
+
+// .container {
+// 	width: $wwidth;
+// }
+
+//----- SPREADSHEET
+.pck {
+	text-align: center;
+	font-weight: bold;
+}
+
+
+//----
+
+ul.list {
+	margin: 0 15px;
+}
+
+.controls {
+	margin-left: 20px;
+}
+.jumbotron h1 {
+	font-weight: bold;
+	letter-spacing: -1px;
+}
+
+footer {
+	text-align: center;
+}
+
+.nav-header {
+	font-weight:bold;
+	font-size:16px; 
+	margin-top:15px;
+}
+
+.jumbotron .btn-large {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 14px 24px;
+  margin-right: 10px;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+.jumbotron .sign-up-form {
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border: 1px solid #999;
+	padding: 15px;
+
+	label {
+		position: relative;
+		text-align: left;
+		width: 100%;
+	}
+	label span {
+		position: absolute;
+		margin-left: 18px;
+		margin-top: 13px;
+		color: #aaa;
+		cursor: text;
+		font-size: 18px;
+	}
+	.sign-up-btn {
+		width: 100%;
+		margin-top: 15px;
+	}
+}
+
+.jumbotron .sign-up-btn {
+	width: 210px;
+	font-size: 20px;
+	padding: 14px 24px;
+}
+
+.hero-unit {
+	h1 {
+		font-size: 63px;
+		font-weight: bold;
+		letter-spacing: -1px;
+	}
+	h2 {
+		font-size: 30px;
+		margin-top: 0;
+	}
+}
+
+.team_pick {
+	cursor: pointer;
+	img {
+		float: left;
+		margin-right: 10px;
+	}
+}
+
+.old_team_pick {
+	img {
+		float: left;
+		margin-right: 10px;
+	}
+	text-decoration: line-through;
+}
+
+.summary {
+	margin: 10px 0 20px;
+	border-bottom: 1px solid #aaa;
+}
+
+.gameForm {
+	select {
+		width: 150px;
+		display: inline;
+	}
+}
+
+.helmet-img {
+	width: 100%;
+}
+
+#helmets {
+	margin: 20px 10px 30px 0px;	
+	div {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+
+#mobile-sign-up {
+  	display: none;
+  	width:100%;
+}
+
+@media all and (max-width: 768px) {
+  .jumbotron {
+  	padding-top: 5px;
+  	border-radius: 0 !important;
+  	margin-top: -20px;
+  	margin-left: -15px;
+  	margin-right: -15px;
+  }
+  #mobile-sign-up {
+  	display: block;
+  }
+}
+

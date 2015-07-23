@@ -1,0 +1,31 @@
+<h1>Listing teams</h1>
+
+<table class="table">
+  <tr>
+    <th>City</th>
+    <th>Mascot</th>
+    <th>City abbreviation</th>
+    <th>Background color</th>
+    <th>Text color</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @teams.each do |team| %>
+  <tr>
+    <td><%= team.city %></td>
+    <td><%= team.mascot %></td>
+    <td><%= team.short_city_name %></td>
+    <td><%= team.background_color %></td>
+    <td><%= team.text_color %></td>
+    <td><%= link_to 'Show', team %></td>
+    <td><%= link_to 'Edit', edit_team_path(team) %></td>
+    <td><%= link_to 'Destroy', team, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Team', new_team_path %>

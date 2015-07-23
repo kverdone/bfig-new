@@ -1,0 +1,175 @@
+      <div class="row">
+        <div class="col-md-2">
+        	<% if Week.closed_week_ids.count > 1 || (Week.closed_week_ids.count == 1 && Week.current_pick_week) %>
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+            	<% Season.current_season.weeks.order(:week_number).each do |x|  %>            		
+            		<% if x.all_games_finished? %>	
+	            		<%= render 'week_summary', week: x %>
+            		<% end %> 
+            	<% end  %>
+			</ul>
+          </div><!--/.well -->
+          <% end %>
+        </div><!--/span-->
+		<div class="col-md-10">
+          <div class="hero-unit">
+            <h1 style="margin-bottom:20px"><%= Season.current_season.year %> Season Picks</h1>
+            <p style="margin-bottom:20px">Just before kickoff each week, all picks will be published here. As the season wears on, this page will weave a story of elation and exasperation, winning and woe, until we&#39;re left with just one...</p>
+            <% if Week.has_second_chance_started? %>
+            	<p><%= link_to "Second Chance Pool Spreadsheet", "#second_chance_spreadsheet", :class => "btn btn-default" %></p>
+            <% end %>
+
+            <h4>5 Most Popular picks of the week</h4>
+            <table class="table table-bordered table-striped table-condensed" style="width:100%">
+            	
+            	<tr>
+            		<% @most_popular_picks.each do |z| %>
+            		<% team = Team.find(z.first) %>
+            			<td>
+            				<%= "#{team.city} #{team.mascot}" %>
+            				<br /><%= pluralize(z.last,'pick') %> (<%= (z.last.to_f / @number_of_picks_in_week.to_f * 100.0).round(1) %>%)
+            			</td>
+            		<% end %>
+            	</tr>
+            	
+
+            </table>
+
+		  	<table class="table table-bordered table-striped table-condensed" width="920px">
+				   <thead>
+				   		  <tr>
+						  	  <th colspan="18" style="color:#00005c;font-size:14px"><em>THE</em> NFL (Brett Favre Isn&#39;t Gonna) Survival Pool: Season 4 Picks</th>
+						  </tr>
+						  <tr>
+						  	  <th>Name</th>
+							  <th style="text-align:center;">W1</th>
+							  <th style="text-align:center;">W2</th>
+							  <th style="text-align:center;">W3</th>
+							  <th style="text-align:center;">W4</th>
+							  <th style="text-align:center;">W5</th>
+							  <th style="text-align:center;">W6</th>
+							  <th style="text-align:center;">W7</th>
+							  <th style="text-align:center;">W8</th>
+							  <th style="text-align:center;">W9</th>
+							  <th style="text-align:center;">W10</th>
+							  <th style="text-align:center;">W11</th>
+							  <th style="text-align:center;">W12</th>
+							  <th style="text-align:center;">W13</th>
+							  <th style="text-align:center;">W14</th>
+							  <th style="text-align:center;">W15</th>
+							  <th style="text-align:center;">W16</th>
+							  <th style="text-align:center;">W17</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% if @data %> 
+							<% @data.each do |user| %>
+							
+						   <tr>
+						   	   <td uid="<%= user[:user_id] %>"><% if user[:alive] == false %>
+						   	   	     <span style="text-decoration:line-through"><%= user[:user_name] %></span>
+						   	   	     <% else %>
+						   	   	     <%= user[:user_name] %>
+						   	   	     <% end %>
+						   	   	 </td>
+						   	   	<% user[:picks_array].each do |pick| %>
+							   		<td class="pck pck-<%= pick[:team].downcase %>">
+							   			<%= pick[:team] %>
+							   		</td>
+								<% end %>
+							</tr>
+							<% end %>
+						<% end %> 
+					</tbody>
+				</table>
+				<% if @data.nil? %>
+					<div class="alert alert-danger">Currently recalculating spreadsheet - Check back in 1 minute</div>
+				<% end %> 
+		  </div>
+		  <div>
+			<% if Week.has_second_chance_started? %>
+			<div id="second_chance_spreadsheet">
+              <h2>Second chance pool: <%= Season.current_season.year %> Season</h2>
+			</div>
+			<table class="table table-bordered table-striped table-condensed" width="920px">
+				   <thead>
+				   		  <tr>
+						  	  <th colspan="18" style="color:#00005c;font-size:14px"><em>THE</em> NFL (Brett Favre Isn&#39;t Gonna) Survival Pool: Season 4 Picks</th>
+						  </tr>
+						  <tr>
+						  	  <th>Name</th>
+							  <th style="text-align:center;">W5</th>
+							  <th style="text-align:center;">W6</th>
+							  <th style="text-align:center;">W7</th>
+							  <th style="text-align:center;">W8</th>
+							  <th style="text-align:center;">W9</th>
+							  <th style="text-align:center;">W10</th>
+							  <th style="text-align:center;">W11</th>
+							  <th style="text-align:center;">W12</th>
+							  <th style="text-align:center;">W13</th>
+							  <th style="text-align:center;">W14</th>
+							  <th style="text-align:center;">W15</th>
+							  <th style="text-align:center;">W16</th>
+							  <th style="text-align:center;">W17</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% if @second_chance_data %>
+						<% @second_chance_data.each do |datum| %>
+							
+						   <tr>
+						   	   <td uid="<%= datum[:user_id] %>"><% if datum[:user_status] != 2 %>
+						   	   	     <span style="text-decoration:line-through"><%= datum[:user_name] %></span>
+						   	   	     <% else %>
+						   	   	     <%= datum[:user_name] %>
+						   	   	     <% end %>
+						   	   	 </td>
+						   	   	<% datum[:secondary_array_of_picks_with_team_info].each do |pick| %>
+							   		<td class="pck pck-<%= pick.short_city_name.downcase %>">
+							   			<%= pick.short_city_name %>
+							   		</td>
+								<% end %>
+						</tr>
+							<% if datum[:array_of_double_picks_with_team_info].present? %>
+								<tr>
+									<% (1 + Week.double_picking_week_number_start - Week.second_chance_week_number_start).times do |x|  %>
+										<td></td>
+									<% end %>
+									<% datum[:array_of_double_picks_with_team_info].each do |pick| %>
+							   		<td class="pck pck-<%= pick.short_city_name.downcase %>">
+							   			<%= pick.short_city_name %>
+							   		</td>
+								<% end %>		
+								</tr>
+							<% end %> 
+						<% end %>
+
+					<% end %> 
+					</tbody>
+					<% if @second_chance_data.nil? %>
+						<div class="alert alert-danger">Currently recalculating spreadsheet - Check back in 1 minute</div>
+					<% end %> 
+				</table>
+				<% end %>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+      
+
+    </div>
+
+  </div>
+
+  <% content_for :extra_css do %>
+  	<style type="text/css">
+	  	<% Team.all.each do |team| %>
+  			<%= ".pck.pck-#{team.short_city_name.downcase}" %> {
+  				background-color: <%= team.background_color %> !important;
+  				color: <%= team.text_color %> !important;
+  			}
+	  	<% end %>
+  	</style>
+  <% end %>

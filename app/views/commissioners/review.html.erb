@@ -1,0 +1,71 @@
+<div class="row">
+<h1>These are the <%= @primary_picks.count %> primary pool picks for Week <%= @week.week_number %></h1>
+<div class="span8">
+<table class="table table-striped" style="width:920px;">
+	<thead>
+		<tr>
+			<th>User</th>
+			<th>Pick</th>
+			<th>Why pick</th>
+			<th>Other comment</th>
+		</tr>
+	</thead>
+	<% @primary_picks.each do |pick| %>
+		<tr>
+			<td><%= pick.user.full_name %></td>
+			<td style="background-color:<%= pick.team.background_color %>;color:<%= pick.team.text_color %>"><%= pick.team.mascot %></td>
+			<td><%= pick.why_pick %></td>
+			<td><%= pick.comment %></td>
+		</tr>
+	<% end %>
+</table>
+</div>
+</div>
+<% if @week.week_number >= Week.second_chance_week_number_start %>
+<div class="row">
+<h1>These are the <%= @secondary_picks.count %> secondary pool picks for Week <%= @week.week_number %></h1>
+<div class="span8">
+	
+<table class="table table-striped" style="width:920px;">
+	<thead>
+		<tr>
+			<th>User</th>
+			<th>Pick</th>
+			<% if @week.week_number >= Week.double_picking_week_number_start %>
+			<th>Second Pick</th>
+			<% end %>
+			<th>Why pick</th>
+			<th>Other comment</th>
+		</tr>
+	</thead>
+	<% @secondary_picks.each do |pick| %>
+		<tr>
+			<td><%= pick.user.full_name %></td>
+			<td style="background-color:<%= pick.team.background_color %>;color:<%= pick.team.text_color %>"><%= pick.team.mascot %></td>
+			<% if @week.week_number >= Week.double_picking_week_number_start %>
+				<% second_team = Team.find(pick.second_team_id) %>
+				<td style="background-color:<%= second_team.background_color %>;color:<%= second_team.text_color %>"><%= second_team.mascot %></td>
+			<% end %> 
+			<td><%= pick.why_pick %></td>
+			<td><%= pick.comment %></td>
+		</tr>
+	<% end %>
+</table>
+</div>
+</div>
+<% end %>
+<div class="row">
+<div class="span8">
+	<h2>These <%= @users_who_havent_picked_emails.count %> users haven't made a PRIMARY POOL pick yet</h2><br />
+	<% @users_who_havent_picked_emails.each do |a_user_email| %>
+		<%= "#{a_user_email}, " %>
+	<% end %>
+	<% if @week.week_number >= Week.second_chance_week_number_start %>
+		<h2>These <%= @second_users_who_havent_picked_emails.count %> users haven't made a SECOND CHANCE pick yet</h2><br />
+		<% @second_users_who_havent_picked_emails.each do |a_user_email| %>
+			<%= "#{a_user_email}, " %>
+		<% end %>
+	<% end %> 
+	
+</div>
+</div>

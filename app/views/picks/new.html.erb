@@ -1,0 +1,53 @@
+<% if Season.season_accepting_signups.present? %>
+	<%= render 'referral_banner' %>
+<% end %> 
+<div class="summary"><h1><%= current_user.full_name %></h1>
+<h2>Status: <%= current_user.status_in_words %></h2>
+<h2>Current Week Pick: 
+<% if @existing_pick.present? %>
+<%= @existing_pick.pick_mascot_string %> (Click new helmet to change)
+<% else %>
+None yet
+<% end %>
+</h2>
+</div>
+<div class="row">
+
+	<div class="col-md-8">
+		<% if current_user.status == 2 && Week.has_double_picking_started? %>
+			<div class="alert alert-info">
+				You will now need to pick two teams each week. Click on both helmets to submit your pick.
+			</div>
+		<% end %> 
+		<% if current_user.status == 1 || (current_user.status == 2 && Week.has_second_chance_started?) %>
+		<h2 style="text-align:center;">Week <%= @week.week_number %></h2>
+		<%= render 'form' %>
+		<% else %>
+		<% if current_user.status == 2 %>
+			<h2 style="text-align:center;">Sorry, you're knocked out! Come back for the second chance pool in week 5!</h2>	
+		<% end %>
+		<% if current_user.status == 3 %>
+		 	<h2 style="text-align:center;">Sorry, you're knocked out! Come back next year!</h2>	
+		<% end %>  
+		<% end %>
+
+	</div>
+
+
+	<div class="col-md-4">
+		<% if current_user.primary_pool_picks && 5 == 4 %>
+		<h2 style="text-align:center;">Pick History</h2>
+		<ul>
+			<li>Wk 1: GB over DAL</li>
+			<li>Wk 2: GB over DAL</li>
+
+		</ul>
+		<% end %>
+
+		<% unless Week.closed_week_ids.empty? %>
+			<div style="text-align:center">
+				<%= link_to "See all picks", "/picks/spreadsheet", :class => 'btn btn-large btn-primary', :style => "width:128px;" %>
+			</div>
+		<% end %>
+	</div>
+</div>

@@ -1,0 +1,133 @@
+
+<% if current_user.status == 2 && Week.has_double_picking_started? %>
+<script type="text/javascript">
+$(document).ready(function() { 
+  var teams_string = '';
+  $('.team_pick').click(function(e) {
+    e.preventDefault();
+    $(this).parent().css('background-color','#ccc');
+    if ($('#pick_team_id').val() === '') {
+      $('#pick_team_id').val($(this).attr('data-team-id'));  
+      console.log($(this).find('.team').html());
+      teams_string += $(this).find('.team').html();
+    } else {
+      if ($(this).attr('data-team-id') === $('#pick_team_id').val()) {
+        // tried to pick same team twice
+        alert("You can't pick the same team for both of your picks");
+      } else {
+        $('#pick_second_team_id').val($(this).attr('data-team-id'));
+        teams_string += ', ' + $(this).find('.team').html();
+        $('.team_name').html(teams_string);
+        $('#pickModal').modal({'show': true});
+      };
+    };
+  });
+  $('#pickModal').on('hidden', function () {
+    teams_string = '';
+    $('#pick_team_id').val('');
+    $('#pick_second_team_id').val('');
+    $('.team_pick').each(function(index, element) {
+      $(element).parent().css('background-color','');
+    });
+  });
+ });
+ 
+</script>
+<% else %>
+<script type="text/javascript">
+$(document).ready(function() { 
+  $('.team_pick').click(function(e) {
+    e.preventDefault();
+    $('#pick_team_id').val($(this).attr('data-team-id'));
+    $('.team_name').html($(this).find('.team').html());
+    $('#pickModal').modal({'show': true});
+  });
+ });
+</script>
+<% end %>
+
+  <% if @pick.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pick.errors.count, "error") %> prohibited this pick from being saved:</h2>
+      <ul>
+      <% @pick.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<table class="table table-hover">
+  <% @games.each do |game| %>
+  <% unless game.away_team_id == 6 && game.home_team_id == 5 && @week.week_number == 1 %>
+    <% away_team = Team.where(:id => game.away_team_id).first %>
+    <% home_team = Team.where(:id => game.home_team_id).first %>
+    <tr id="pick">
+      <td>
+        <% if @team_ids_the_user_cant_pick.include?(away_team.id) %>
+          <div class="old_team_pick">
+        <% else %>
+          <div class="team_pick" data-team-id="<%= away_team.id %>">
+        <% end %>
+          <%= image_tag("#{away_team.short_city_name.upcase}.PNG") %>
+          <%= away_team.city %><br />
+          <span class="team"><%= away_team.mascot %></span><br />
+          <%= away_team.record %>
+        </div>
+      </td> 
+      <td><span style="font-size:larger">@</span></td>
+      <td>
+        <% if @team_ids_the_user_cant_pick.include?(home_team.id) %>
+          <div class="old_team_pick">
+        <% else %>
+          <div class="team_pick" data-team-id="<%= home_team.id %>">
+        <% end %>
+          <%= image_tag("#{home_team.short_city_name.upcase}.PNG") %>
+          <%= home_team.city %><br />
+          <span class="team"><%= home_team.mascot %></span><br />
+          <%= home_team.record %>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+  <% end %>
+</table>
+  
+<!-- Modal -->
+<div class="modal fade" id="pickModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @pick, :class => "pickForm" do |f| %>
+      <%= f.hidden_field :team_id, :value => nil %>
+      <% if current_user.status == 2 && Week.has_double_picking_started? %>
+      <%= f.hidden_field :second_team_id, :value => nil %>
+      <% end %>
+      <%= f.hidden_field :week_id, :value => @week.id %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <% if current_user.status == 2 && Week.has_double_picking_started? %>
+            <h4 class="modal-title" id="myModalLabel">Your Picks: <span class="team_name"></span></h4>
+         <% else %>
+            <h4 class="modal-title" id="myModalLabel">Your Pick: <span class="team_name"></span></h4>
+         <% end %>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <% if current_user.status == 2 && Week.has_double_picking_started? %>
+              <%= f.label :why_pick, "Why are you picking these teams?" %><br />
+          <% else %>
+              <%= f.label :why_pick, "Why are you picking this team?" %><br />
+          <% end %>
+          <%= f.text_area :why_pick, :rows => 5, :cols => 80, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :comment, "Any other words for the Commish?" %><br />
+          <%= f.text_area :comment, :rows => 5, :cols => 80, class: 'form-control' %>      
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= f.submit "Create Pick", :class => "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<script>
+$(document).ready(function() {
+	// Stuff to do as soon as the DOM is ready;
+	$('label input').keyup(function() {
+		if ($(this).val() === "") {
+			$(this).parent().find('span').css('visibility','');
+		} else {
+			$(this).parent().find('span').css('visibility','hidden');
+		};
+	});
+});
+
+</script>
+
+<div class="jumbotron">
+	<h1><em>THE</em> NFL (Brett Favre Isn&#39;t Gonna) Survival Pool</h1>
+
+    <a href="#sign-up" class="btn btn-primary btn-lg" id="mobile-sign-up">Sign Up</a>
+    <h2 style="margin-top:10px">700 brave entrants, 32 possible teams, 17 weeks, 1 title belt... and a whole lot of moxie.</h2>
+        <div class="row" id="helmets">
+          <div class="col-md-6">
+    			 <img src="http://i.imgur.com/FNi41pV.png" class="helmet-img" />
+          </div>
+          <div class="col-md-6">
+            <img src="http://i.imgur.com/8OGjkYJ.png" class="helmet-img" />
+          </div>
+        </div>
+		<div class="row" style="margin-top:15px">
+			<div class="col-md-6 col-lg-8">
+        		<p style="font-size:medium">From its humble start in 2009, the NBFIGSP has grown from 47 brave pioneers to 700* steely competitors. The concept? So simple that even Vince Young could play: Pick one team to win its game each week; if that team wins, you move on. You can only pick each team once, though, so choose wisely. The last person standing wins.</p>
+        		<p style="font-size:medium">Did we say humble start? Well, BFIG is now the greatest survival pool on the planet. Even Jim Harbaugh and Pete Carroll agree. They probably play in the damn pool using terrible pseudonyms.</p>
+             	<p style="font-size:medium">Throw your name into the pool today. No, really. Right now. The survival gods are watching... and they don't like stragglers.</p>
+             	<p style="font-size:small"><em>* = Expected number. Like Albert Haynesworth and chicken wings, the more the merrier.</em></p>
+			</div>
+			
+      <div class="col-md-6 col-lg-4">
+			<div id="sign-up" class="sign-up-form">
+			<% if Season.season_accepting_signups  %>
+			<p><strong>Join the <%= Season.season_accepting_signups.year %> Pool</strong></p>
+
+			
+				<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: {:class => ''}) do |f| %>
+  					<%= devise_error_messages! %>
+  					<label>
+  						<span>Full Name (First AND Last)</span>
+  						<%= f.text_field :full_name, class: 'form-control input-lg' %>
+  					</label>
+  					<label>
+  						<span>Email Address</span>
+  						<%= f.email_field :email, class: 'form-control input-lg' %>
+  					</label>
+  					<label>
+  						<span>Password</span>
+  						<%= f.password_field :password, class: 'form-control input-lg' %>
+  					</label>
+  					<label>
+  						<span>Password Confirmation</span>
+  						<%= f.password_field :password_confirmation, class: 'form-control input-lg' %>
+  					</label>
+          <label>
+            <span>Referral Code</span>
+            <%= f.text_field :signup_referral_code, class: 'form-control input-lg referral_code' %>
+          </label>
+  					<%= f.submit "Sign up", :class => "btn btn-primary sign-up-btn" %>
+				<% end %>
+			<% else %>
+				<h3>Signups are closed for season 4! Thanks for your interest and check back with us next year!</h3>
+
+			<% end %>
+			</div>
+      <div style="text-align:center;margin-top:15px;"><%= link_to "Already a member? Sign in", new_user_session_path %></div>
+      </div>
+</div>

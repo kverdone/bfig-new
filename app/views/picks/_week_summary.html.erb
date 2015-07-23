@@ -1,0 +1,6 @@
+<%= puts week.inspect %>
+<li class="nav-header" style="font-weight:bold;font-size:16px; margin-top:15px;">Week <%= week.week_number %></li>
+              			<li>Unique picks: <%= week.teams_picked.count %></li>
+              			<li>Pool record: <%= week.cache_record_of_teams_picked %></li>
+              			<li>Knocked out: <%= week.cache_number_knocked_out %></li>        		
+              			<li>Remaining: <%= week.cache_number_remaining %></li>

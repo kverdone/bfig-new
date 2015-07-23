@@ -1,0 +1,41 @@
+<script type="text/javascript">
+$(document).ready(function() {
+  var ref = window.location.search.split("=")[1];
+  $('.referral_code').val(ref);
+});
+</script>
+<% if Season.season_accepting_signups  %>
+<h3>Join the Pool for <%= Season.season_accepting_signups.year %></h3>
+<%= devise_error_messages! %>
+<div class="sign-up-form" style="width:300px;">
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :class => 'form-group well') do |f| %>
+          <label>
+            <span>Name</span>
+            <%= f.text_field :full_name, class: 'form-control' %>
+          </label>
+          <label>
+            <span>Email Address</span>
+            <%= f.email_field :email, class: 'form-control' %>
+          </label>
+          <label>
+            <span>Password</span>
+            <%= f.password_field :password, class: 'form-control' %>
+          </label>
+          <label>
+            <span>Password Confirmation</span>
+            <%= f.password_field :password_confirmation, class: 'form-control' %>
+          </label>
+          <label>
+            <span>Referral Code</span>
+            <%= f.text_field :signup_referral_code, class: 'form-control referral_code' %>
+          </label>
+        <br />
+          <%= f.submit "Sign up", :class => "btn btn-primary sign-up-btn" %>
+      <% end %>
+      </div>
+<% else %>
+  <h3>Signups are closed for season 4! Thanks for your interest and check back with us next year!</h3>
+
+<% end %>
+
+<%= render "links" %>

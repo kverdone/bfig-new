@@ -1,0 +1,21 @@
+<table class="table">
+	<tr>
+		<th>Away team</th>
+		<th>Home team</th>
+	</tr>
+<% @games.each do |game| %>
+<%= form_for game, :html => { :method => :put }, :remote => true do |f| %>
+<tr>
+	<td>
+		<%= f.select(:away_team_id, Team.all.collect {|p| [ p.mascot, p.id ] }, { :include_blank => true }) %>
+	</td>
+	<td>
+		<%= f.select(:home_team_id, Team.all.collect {|p| [ p.mascot, p.id ] }, { :include_blank => true }) %>
+	</td>
+	<td><%= f.submit "Submit" %>
+	</td>
+</tr>
+
+<% end %>
+<% end %>
+</table>
