@@ -24,7 +24,7 @@
 				<h3>RULE #2: You *must* pay your entry fee before Sept. 11 at 11:59 p.m. (PDT). Read on for how to pay.</h3>
 				<p></p>
 			<% else %>
-				<h3>You're paid up and approved for the <%= Season.season_accepting_signups.year %> season. Thanks!</h3>
+				<h3><strong>You're paid up and approved for the <%= Season.season_accepting_signups.year %> season. Thanks!</strong></h3>
 				<p> </p>
 			<% end %>
 			<div class="btn-group btn-group-lg">
@@ -38,7 +38,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12" id="why">
-			<h1>Why BFIG will change your life</h1>
+			<h1 style="margin-top:30px; margin-bottom:0px;">Why BFIG will change your life</h1>
 			<hr>
 			<ul class="list">
 				<li>Last year, our champ took home <strong>a cool $13,500</strong>. This year, first prize should be <strong>$20,000</strong>. For those keeping score, $20,000 on a $25 wager is the best return since Enron.</li>
@@ -49,7 +49,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12" id="pay">
-			<h1>How to pay (do it now!)</h1>
+			<h1 style="margin-top:30px; margin-bottom:0px;">How to pay (do it now!)</h1>
 			<hr>
 			<ul class="list">
 				<li><strong>Your season fee must be in by deadline (Sept. 11 at 11:59pm PST) - no exceptions.</strong> Commish can't deal with Eli Manning-esque latency.</li>
@@ -64,7 +64,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12" id="payouts">
-			<h1>2015 payouts</h1>
+			<h1 style="margin-top:30px; margin-bottom:0px;">2015 payouts</h1>
 			<hr>
 			<ul class="list">
 				<li>We need to start doing the jumbo check thing. Have a jumbo check guy? Send him my way.</li>
@@ -73,7 +73,7 @@
 				<li>Roughly 5% of the pool gets paid. This year, that'll mean ~100 places.</li> 
 				<li>The lowest places get $30. You can buy a six-pack of PBR with your profits and tell anyone who'll listen about how close you were to getting daddy a new car.</li>
 				<li>If you drop out in weeks 1-4, you get to play in the Second Chance Pool - at no extra cost - starting in Week 5. It's the Wild West of survival, and the winner of that pool will take home $1,000.</li>
-				<li>Additionally, there's a Week 12 pickem. Everyone can play at no extra cost. The winner of the pickeem (pick every game straight up) will get $300.</li>
+				<li>Additionally, there's a Week 12 pickem. Everyone can play at no extra cost. The winner of the pickem (pick every game straight up) will get $300.</li>
 				<li>Payouts for every place will be included in the Week 1 PICKS email.</li>
 				<li>All payouts will be distributed at the same time, once the full season has concluded (January).</li>
 			</ul>
@@ -81,18 +81,18 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12" id="refer">
-			<h1>Why referring friends = win</h1>
+			<h1 style="margin-top:30px; margin-bottom:0px;">Why referring friends = win</h1>
 			<hr>
 			<ul class="list">
 				<li>This pool has grown entirely through you referring your friends. It's a huge part of what makes it so much fun. You know a bunch of people in the pool, and for everyone else, you know which arm of the tree they belong to.</li>
-				<li>Yeah, a tree. We have an actual BFIG tree that shows how we all know each other. It's awesome, and having a huge branch is second in prestige only to winning the title belt. Do you really want an empty branch?</li>
-				<li>Shoot off some emails and texts right now. Again, <strong>the link your friends need is: <%= link_to "http://www.bfigsurvivalpool.com/signup?ref=#{current_user.referral_code}", "http://www.bfigsurvivalpool.com/signup?ref=#{current_user.referral_code}" %></strong>.</li>
+				<li>Yeah, <strong><%= link_to "a tree", 'http://bit.ly/BFIGtree2014' %></strong>. We have an actual BFIG tree that shows how we all know each other. It's awesome, and having a huge branch is second in prestige only to winning the title belt. Do you really want an empty branch?</li>
+				<li>Shoot off some emails and texts right now. Again, <strong>the link your friends need is: <%= link_to "http://www.bfigsurvivalpool.com/signup?ref=#{current_user.referral_code}", 'http://www.bfigsurvivalpool.com/signup?ref=#{current_user.referral_code}' %></strong>.</li>
 			</ul>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12" id="dis">
-			<h1>Disclaimer</h1>
+			<h1 style="margin-top:30px; margin-bottom:0px;">Disclaimer</h1>
 			<hr>
 			<ul class="list">
 				<li>BFIG is a sports community and skill-based fantasy sports game. To win, you must possess knowledge of NFL teams' relative strength and the myriad other variables that affect which team wins each game. You must also apply a unique strategy over several months, related to which teams you pick at which times. Point spreads do not play a role in BFIG. The prizes awarded in BFIG are not based on the outcome of any single game or any single player performance. BFIG provides no information to participants that would reduce the impact of knowledge and skill on the outcome. BFIG is not a gambling business. BFIG does not take any profit from entry fees. BFIG is not open to people residing in Arizona, Arkansas, Florida, Iowa, Kansas, Montana, Louisiana, or Tennessee.</li>
@@ -101,7 +101,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12" id="rules">
-			<h1>Full Rules</h1>
+			<h1 style="margin-top:30px; margin-bottom:0px;">Full Rules</h1>
 			<hr>
 			<p>If you've made it this far, I salute you. You're the type of person who'd want to read the <strong><%= link_to "full pool rules", '/rules', "target" => "_blank" %></strong>. Get at me, ESPN legal department; I'm a one-man wrecking machine.</p>
 			<p> </p>
