@@ -10,7 +10,7 @@ $(document).ready(function() {
 <div class="sign-up-form" style="width:300px;">
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :class => 'form-group well') do |f| %>
           <label>
-            <span>Name</span>
+            <span>Full name (first &amp; last!)</span>
             <%= f.text_field :full_name, class: 'form-control' %>
           </label>
           <label>
@@ -34,7 +34,7 @@ $(document).ready(function() {
       <% end %>
       </div>
 <% else %>
-  <h3>Signups are closed for season 4! Thanks for your interest and check back with us next year!</h3>
+  <h3>Signups are closed for the 2015 season! Thanks for your interest and check back with us next year!</h3>
 
 <% end %>
 
