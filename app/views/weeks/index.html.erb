@@ -10,6 +10,7 @@
 
 <% @weeks.each do |week| %>
   <tr>
+    <td><%= week.season_id %></td>
     <td><%= week.week_number %></td>
     <td><%= link_to 'Show', week %></td>
     <td><%= link_to 'Edit', edit_week_path(week) %></td>
