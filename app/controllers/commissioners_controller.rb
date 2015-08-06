@@ -45,7 +45,6 @@ class CommissionersController < ApplicationController
     
   end
 
-
   def ensure_admin
   	if current_user.try(:is_admin) != 1
   		redirect_to root_path, error: "you are not an admin"
