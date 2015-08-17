@@ -43,7 +43,7 @@ $(document).ready(function() {
 <div class="row">
 	<div class="col-md-8">
     <% if @unverified_users.any? %>
-    <h2>Users who need to be verified: @unverified_users.length</h2>
+    <h2>Users who need to be verified: <%=@unverified_users.length %></h2>
     <table class="table">
         <thead>
           <tr>
