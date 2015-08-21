@@ -99,8 +99,8 @@ class User < ActiveRecord::Base
   #
   # Returns status string for display on the SIHP
   def status_in_words
-    return "Alive" if status == 1
-    return "Knocked Out (Second Chance)" if status == 2
+    return "Champion's Bracket" if status == 1
+    return "Second Chance Bracket" if status == 2
     return "Knocked Out for the season!"
   end
 

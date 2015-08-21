@@ -42,6 +42,12 @@ footer {
 	margin-top:15px;
 }
 
+.navbar {
+    -webkit-box-shadow: 0px 5px 10px 0px rgba(153,153,153,0.9);
+    -moz-box-shadow: 0px 5px 10px 0px rgba(153,153,153,0.9);
+    box-shadow: 0px 5px 10px 0px rgba(153,153,153,0.9);
+}
+
 .jumbotron .btn-large {
   font-size: 20px;
   font-weight: bold;
@@ -96,11 +102,18 @@ footer {
 }
 
 .team_pick {
-	cursor: pointer;
-	img {
-		float: left;
-		margin-right: 10px;
-	}
+    cursor: pointer;
+    padding: 5px 0 5px 5px;
+    &:hover {
+        /*color: #f00;*/
+        /*background: #f00;*/
+        background-color: #ccc;
+    }
+
+    img {
+        float: left;
+        margin-right: 10px;
+    }
 }
 
 .old_team_pick {
