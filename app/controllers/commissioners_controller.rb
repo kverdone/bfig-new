@@ -41,7 +41,7 @@ class CommissionersController < ApplicationController
       end
       @primary_freq[pick.team.mascot][1] += 1
     end
-    @primary_freq.sort_by {|k,v| v[1]}.reverse.to_h
+    @primary_freq = @primary_freq.sort_by {|k,v| v[1]}.reverse.to_h
 
     @users_who_havent_picked_emails = (@week.user_ids_who_can_pick_in_primary_pool - @primary_picks.collect{|x| x.user_id}).collect{|y| User.find(y).email}
     
