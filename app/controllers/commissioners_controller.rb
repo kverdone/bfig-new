@@ -4,11 +4,13 @@ class CommissionersController < ApplicationController
     #@unverified_users = User.where(verified: false)
   	#@users = User.where("id in (?)",UserSeason.user_ids_in_current_season).includes(:user_seasons).order(:id).all
     #@teams = Team.order(:id).all
+    @picks_week = Week.order(:id).last
     @weeks = (Week.where(:closed => false) + Week.where(:closed => true).order("id DESC").limit(1)).sort_by{|x| [x.season_id, x.week_number]}
     @seasons = Season.order(:id).all
   end
 
   def users
+    @picks_week = Week.order(:id).last
     @unverified_users = User.where(verified: false)
     @users = User.where("id in (?)",UserSeason.user_ids_in_current_season).includes(:user_seasons).order(:id).all
   end
