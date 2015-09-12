@@ -111,6 +111,7 @@ $(document).ready(function() {
           <th>Season Year</th>
           <th>Signup status</th>
           <th>Signup count</th>
+          <th>Approved Signups</th>
           <th></th>
         </tr>
       </thead>
@@ -128,6 +129,9 @@ $(document).ready(function() {
             </td>
             <td>
               <%= season.user_seasons.count %>
+            </td>
+            <td>
+              <%= season.user_seasons.where(approved: true) %>
             </td>
             <td style="width:80px;">
               <% if season.signup_status == 1 %>
