@@ -44,6 +44,9 @@ $(document).ready(function() {
   <ul>
     <li><%= link_to "Index", commissioners_index_path %></li>
     <li><%= link_to "Users", commissioners_users_path %></li>
+    <% if week.open == true %>
+    <li><%= link_to "Review Picks", "/weeks/#{Week.order(:id).last.id}/review" %></li>
+    <% end %>
   </ul>
 </div>
 <div class="row">
