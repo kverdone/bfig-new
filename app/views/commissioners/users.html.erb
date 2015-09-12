@@ -1,0 +1,115 @@
+<script>
+$(document).ready(function() {
+    $('.approve').click(function(e) {
+   e.preventDefault();
+    // alert('hello');  
+    var approve_id;
+    approve_id = $(this).parent().parent().children().first().text();
+
+    $.post('/commissioners/approve', 'approve_id='+approve_id, function(data) {
+   if (data === "success") {
+    $(this).parent().html('Approved');
+  };
+});
+});
+  $('.season_approve').click(function(e) {
+    e.preventDefault();
+    $(this).parent().html('Approved');
+    var user_season_id;
+    user_season_id = $(this).attr('data-user-season-id');
+    $.post('/commissioners/approve_user_season', 'user_season_approve_id='+user_season_id, function(data) {
+      if (data === "success") {
+        $().parent().html('Approved');
+      };
+    });
+  });
+  $('.user_verify').click(function(e) {
+    e.preventDefault();
+    $(this).parent().html('Verified');
+    var user_id;
+    user_id = $(this).attr('data-user-id');
+    $.post('/commissioners/verify_user', 'user_verify_id='+user_id, function(data) {
+      if (data === "success") {
+        $().parent().html('Verified');
+      };
+    });
+  });
+});
+
+
+</script>
+
+<h1 class="page-header">Commissioners Portal</h1>
+<div class="row">
+  <ul>
+    <li><%= link_to "Index", commissioners_index_path %></li>
+    <li><%= link_to "Users", commissioners_users_path %></li>
+  </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+    <% if @unverified_users.any? %>
+    <h2>Users who need to be verified: <%=@unverified_users.length %></h2>
+    <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Sign up referral code</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @unverified_users.each do |x| %>
+
+          <tr>
+            <td><%= x.id %></td>
+            <td><%= x.email %></td>
+            <td><%= x.full_name %></td>
+            <td><%= x.signup_referral_code %></td>
+            <td>
+              <%= link_to "Verify", "#", :class => "btn btn-primary user_verify", "data-user-id" => x.id %>
+            </td>
+          </tr>
+         <% end %>
+        </tbody>
+      </table>
+    <% end %> 
+</div>
+<div class="col-md-12">
+        <h2>Users signed up for the <%= Season.current_season.year if Season.current_season %> season: <%= @users.count %></h2>
+<table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Referred by</th>
+            <th>Approved <%= Season.current_season.year if Season.current_season %>?</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @users.each do |x| %>
+
+          <tr>
+            <td><%= x.id %></td>
+            <td><%= x.email %></td>
+            <td><%= x.full_name %></td>
+            <td><%= x.referring_user.full_name %></td>
+            <td>
+              <% the_user_season = x.user_seasons.where(season_id: Season.current_season).first %>
+              <% if the_user_season && !the_user_season.is_approved? %>
+                <%= link_to "Approve", "#", :class => "btn btn-primary season_approve", "data-user-season-id" => the_user_season.id %>
+              <% end %> 
+              <% if the_user_season && the_user_season.is_approved? %>
+                Approved
+              <% end %> 
+            </td>
+          </tr>
+         <% end %>
+        </tbody>
+      </table>
+  </div>
+
+</div>

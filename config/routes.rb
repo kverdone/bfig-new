@@ -18,6 +18,7 @@ Bfig::Application.routes.draw do
 
   put "games" => "games#create"
   get "commissioners/index"
+  get "commissioners/users"
   post "commissioners/approve"
   post "commissioners/approve_user_season"
   post "commissioners/verify_user"
