@@ -1,9 +1,10 @@
 <% if Season.season_accepting_signups.present? %>
 	<%= render 'referral_banner' %>
 <% end %> 
+<!-- NO PICKING ALERT
 <div class="alert alert-warning">
 	<strong>NOTE: You can no longer pick NE-PIT.</strong> If you do, you'll be out of the pool!
-</div>
+</div> -->
 <div class="summary" style="padding-bottom: 10px;">
 <h2><%= current_user.full_name %></h2>
 <h3><strong>Status:</strong> <%= current_user.status_in_words %></h3>
