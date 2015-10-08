@@ -54,6 +54,16 @@ class CommissionersController < ApplicationController
     
     if @week.has_second_chance_started?
       @secondary_picks = @week.secondary_picks.includes([:user]).sort_by{|x| [x.team.short_city_name, x.user.full_name]}
+      
+      @secondary_freq = {}
+      @secondary_picks.each do |pick|
+        if !@secondary_freq.has_key?(pick.team.mascot)
+          @secondary_freq[pick.team.mascot] = [pick.team.short_city_name, 0]
+        end
+        @secondary_freq[pick.team.mascot][1] += 1
+      end
+      @secondary_freq = @secondary_freq.sort_by {|k,v| v[1]}.reverse.to_h
+      
       @second_users_who_havent_picked_emails = (@week.user_ids_who_can_pick_in_secondary_pool - @secondary_picks.collect{|x| x.user_id}).collect{|y| User.find(y).email}
     end 
     respond_to do |format|

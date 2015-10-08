@@ -22,6 +22,7 @@
 </table>
 </div>
 <div class="col-md-3">
+	<h4>Primary Pick Distribution</h4>
 	<table class="table" style="width:100%">
 	<thead>
 		<tr>
@@ -35,6 +36,25 @@
 			<td class="<%= value[0] %>"><%= team %></td>
 			<td><%= value[1] %></td>
 			<td><%= (value[1].to_f / @primary_picks.count * 100).round(1) %></td>
+		</tr>
+	<% end %>
+	</table>
+</div>
+<div class="col-md-3">
+	<h4>Secondary Pick Distribution</h4>
+	<table class="table" style="width:100%">
+	<thead>
+		<tr>
+			<th>Team Name</th>
+			<th>Pick Count</th>
+			<th>%</th>
+		</tr>
+	</thead>
+	<% @secondary_freq.each do |team, value| %>
+		<tr>
+			<td class="<%= value[0] %>"><%= team %></td>
+			<td><%= value[1] %></td>
+			<td><%= (value[1].to_f / @secondary_picks.count * 100).round(1) %></td>
 		</tr>
 	<% end %>
 	</table>
