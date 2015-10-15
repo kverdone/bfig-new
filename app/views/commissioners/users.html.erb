@@ -88,7 +88,7 @@ $(document).ready(function() {
             <th>#</th>
             <th>Email</th>
             <th>Name</th>
-            <th>Referred by</th>
+            <!-- <th>Referred by</th> -->
             <th>Approved <%= Season.current_season.year if Season.current_season %>?</th>
           </tr>
         </thead>
@@ -99,7 +99,7 @@ $(document).ready(function() {
             <td><%= x.id %></td>
             <td><%= x.email %></td>
             <td><%= x.full_name %></td>
-            <td><%= x.referring_user.full_name %></td>
+            <!-- <td><%= x.referring_user.full_name %></td> -->
             <td>
               <% the_user_season = x.user_seasons.where(season_id: Season.current_season).first %>
               <% if the_user_season && !the_user_season.is_approved? %>
