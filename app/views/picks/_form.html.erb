@@ -57,34 +57,35 @@ $(document).ready(function() {
     </div>
   <% end %>
 <table class="table table-hover">
+  <tr>
+    <td style="text-align: center;"><strong>Away</strong></td>
+    <td style="text-align: center;"><strong>Home</strong></td>
+  </tr>
   <% @games.each do |game| %>
   <% unless game.away_team_id == 6 && game.home_team_id == 5 && @week.week_number == 1 %>
     <% away_team = Team.where(:id => game.away_team_id).first %>
     <% home_team = Team.where(:id => game.home_team_id).first %>
     <tr id="pick">
-      <td>
+      <td style="line-height: 45px; text-align: center;">
         <% if @team_ids_the_user_cant_pick.include?(away_team.id) %>
           <div class="old_team_pick">
         <% else %>
           <div class="team_pick" data-team-id="<%= away_team.id %>">
         <% end %>
-          <%= image_tag("#{away_team.short_city_name.upcase}.PNG") %>
-          <%= away_team.city %><br />
-          <span class="team"><%= away_team.mascot %></span><br />
-          <%= away_team.record %>
+          <%= image_tag("logos/#{away_team.short_city_name.upcase}.png", :class => "team-icon") %>
+          
+          <span class="team"><%= away_team.city %> <%= away_team.mascot %> (<%= away_team.record %>)</span>
         </div>
       </td> 
-      <td><span style="font-size:larger">@</span></td>
-      <td>
+    
+      <td style="line-height: 45px; text-align: center;">
         <% if @team_ids_the_user_cant_pick.include?(home_team.id) %>
           <div class="old_team_pick">
         <% else %>
           <div class="team_pick" data-team-id="<%= home_team.id %>">
         <% end %>
-          <%= image_tag("#{home_team.short_city_name.upcase}.PNG") %>
-          <%= home_team.city %><br />
-          <span class="team"><%= home_team.mascot %></span><br />
-          <%= home_team.record %>
+          <%= image_tag("logos/#{home_team.short_city_name.upcase}.png", :class => "team-icon") %>
+          <span class="team"><%= home_team.city %> <%= home_team.mascot %> (<%= home_team.record %>)</span>
         </div>
       </td>
     </tr>

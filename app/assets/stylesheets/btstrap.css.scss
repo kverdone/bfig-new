@@ -111,14 +111,14 @@ footer {
     }
 
     img {
-        float: left;
+        /*float: left;*/
         margin-right: 10px;
     }
 }
 
 .old_team_pick {
 	img {
-		float: left;
+		/*float: left;*/
 		margin-right: 10px;
 	}
 	text-decoration: line-through;
@@ -199,3 +199,5 @@ footer {
 .BAL { background-color: #7F77AE; color: #000000; }
 .TB { background-color: #966C19; color: #B20000; }
 .MIN { background-color: #8B008B; color: #FFD700; }
+
+.team-icon { height: 45px; }

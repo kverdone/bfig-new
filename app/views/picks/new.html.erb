@@ -17,7 +17,7 @@ None yet
 </div>
 <div class="row">
 
-	<div class="col-md-8">
+	<div class="col-md-10">
 		<% if current_user.status == 2 && Week.has_double_picking_started? %>
 			<div class="alert alert-info">
 				You will now need to pick two teams each week. Click on both helmets to submit your pick.
@@ -38,7 +38,7 @@ None yet
 	</div>
 
 
-	<div class="col-md-4">
+	<div class="col-md-2">
 		<% if current_user.primary_pool_picks && 5 == 4 %>
 		<h2 style="text-align:center;">Pick History</h2>
 		<ul>
