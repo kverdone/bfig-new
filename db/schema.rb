@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140916035413) do
+ActiveRecord::Schema.define(version: 20151017221710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookmarks", force: true do |t|
+    t.integer  "pick_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "games", force: true do |t|
     t.integer  "week_number"
@@ -25,21 +31,6 @@ ActiveRecord::Schema.define(version: 20140916035413) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "season_id"
-  end
-
-  create_table "mixes", force: true do |t|
-    t.string   "url"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "sc_id"
-    t.string   "sc_title"
-    t.string   "sc_artist"
-    t.string   "sc_stream_url"
-    t.string   "sc_artwork_url"
-    t.string   "sc_download_url"
-    t.integer  "sc_duration"
-    t.integer  "sc_artist_id"
-    t.datetime "sc_created_at"
   end
 
   create_table "picks", force: true do |t|
@@ -63,13 +54,6 @@ ActiveRecord::Schema.define(version: 20140916035413) do
     t.datetime "updated_at",    null: false
   end
 
-  create_table "songs", force: true do |t|
-    t.string   "title"
-    t.string   "artist"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "teams", force: true do |t|
     t.string   "city"
     t.string   "mascot"
@@ -78,14 +62,6 @@ ActiveRecord::Schema.define(version: 20140916035413) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "short_city_name"
-  end
-
-  create_table "tracks", force: true do |t|
-    t.integer  "song_id"
-    t.integer  "mix_id"
-    t.integer  "track_timestamp"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
   end
 
   create_table "user_seasons", force: true do |t|
