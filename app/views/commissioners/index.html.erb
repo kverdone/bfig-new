@@ -46,6 +46,7 @@ $(document).ready(function() {
     <li><%= link_to "Users", commissioners_users_path %></li>
     <% if @picks_week.open == true %>
     <li><%= link_to "Review Picks", "/weeks/#{@picks_week.id}/review" %></li>
+    <li><%= link_to "Bookmarked Comments", commissioners_bookmarks_path %></li>
     <% end %>
   </ul>
 </div>

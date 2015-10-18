@@ -1,0 +1,36 @@
+<h1 class="page-header">Commissioners Portal</h1>
+<div class="row">
+  <ul>
+    <li><%= link_to "Index", commissioners_index_path %></li>
+    <li><%= link_to "Users", commissioners_users_path %></li>
+    <% if @picks_week.open == true %>
+    <li><%= link_to "Review Picks", "/weeks/#{@picks_week.id}/review" %></li>
+    <li><%= link_to "Bookmarked Comments", commissioners_bookmarks_path %></li>
+    <% end %>
+  </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+    <h2>Bookmarked Comments</h2>
+    <table class="table">
+      <tr>
+        <th>Week
+        <th>Comment Text</th>
+      </tr>
+      <% @picks.each do |x| %>
+      <tr>
+        <td>
+          <%= x.week_id %>
+        </td>
+        <td>
+        <% if x.is_second_chance %>
+          <%= "#{x.user.full_name} (#{x.team.mascot}) [Second Chance]: #{x.why_pick}" %>
+        <% else %>
+          <%= "#{x.user.full_name} (#{x.team.mascot}): #{x.why_pick}" %>
+        <% end %>  
+        </td>
+      </tr>
+      <% end %>
+      </table>
+</div>
+</div>

@@ -15,6 +15,12 @@ class CommissionersController < ApplicationController
     @users = User.where("id in (?)",UserSeason.user_ids_in_current_season).includes(:user_seasons).order(:id).all
   end
 
+  def bookmarks
+    @picks_week = Week.order(:id).last
+    @pick_ids = Bookmark.order(id: :desc).limit(100).pluck(:pick_id)
+    @picks = Pick.includes(:user).includes(:team).find(@pick_ids)
+  end
+
   def approve
   	logger.debug params[:approve_id]
   	User.find(params[:approve_id]).update_attribute(:approved, true)
