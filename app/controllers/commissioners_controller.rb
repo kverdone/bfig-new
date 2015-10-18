@@ -18,7 +18,7 @@ class CommissionersController < ApplicationController
   def bookmarks
     @picks_week = Week.order(:id).last
     @pick_ids = Bookmark.order(id: :desc).limit(100).pluck(:pick_id)
-    @picks = Pick.includes(:user).includes(:team).find(@pick_ids)
+    @picks = Pick.order(id: :desc).includes(:user).includes(:team).find(@pick_ids)
   end
 
   def approve
@@ -38,6 +38,15 @@ class CommissionersController < ApplicationController
     logger.debug params[:user_verify_id]
     User.find(params[:user_verify_id]).update_attribute(:verified,true)
     User.find(params[:user_verify_id]).generate_referral_code!
+    render :text => "success"
+  end
+
+  def bookmark_comment
+    logger.debug params[:bookmark_pick_id]
+    @bkmk = Bookmark.where(pick_id: params[:bookmark_pick_id])
+    if @bkmk.count == 0
+      Bookmark.create(pick_id: params[:bookmark_pick_id])
+    end
     render :text => "success"
   end
 

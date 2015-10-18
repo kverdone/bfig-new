@@ -1,3 +1,21 @@
+<script>
+$(document).ready(function() {
+  $('.bookmark_comment').click(function(e) {
+    e.preventDefault();
+    $(this).parent().html('&#10003');
+    var pick_id;
+    pick_id = $(this).attr('data-pick-id');
+    $.post('/commissioners/bookmark_comment', 'bookmark_pick_id='+pick_id, function(data) {
+      if (data === "success") {
+        $().parent().html('&#10003');
+      };
+    });
+  });
+});
+
+
+</script>
+
 <div class="row">
 <h1>These are the <%= @primary_picks.count %> primary pool picks for Week <%= @week.week_number %></h1>
 <div class="row">
@@ -9,6 +27,7 @@
 			<th>Pick</th>
 			<th>Why pick</th>
 			<th>Other comment</th>
+			<th>Bookmark?</th>
 		</tr>
 	</thead>
 	<% @primary_picks.each do |pick| %>
@@ -17,6 +36,9 @@
 			<td style="background-color:<%= pick.team.background_color %>;color:<%= pick.team.text_color %>"><%= pick.team.mascot %></td>
 			<td><%= pick.why_pick %></td>
 			<td><%= pick.comment %></td>
+			<td>
+              <%= link_to "+", "#", :class => "btn btn-primary bookmark_comment", "data-pick-id" => pick.id %>
+            </td>
 		</tr>
 	<% end %>
 </table>

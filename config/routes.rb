@@ -23,6 +23,7 @@ Bfig::Application.routes.draw do
   post "commissioners/approve"
   post "commissioners/approve_user_season"
   post "commissioners/verify_user"
+  post "commissioners/bookmark_comment"
   
   resources :games
 
