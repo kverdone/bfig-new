@@ -111,6 +111,18 @@ class PicksController < ApplicationController
   def tree
     render 'tree'
   end
+  
+  def tree_radial
+    render 'tree_radial'
+  end
+  
+  def tree_vertical
+    render 'tree_vertical'
+  end
+  
+  def tree_elbow
+    render 'tree_elbow'
+  end
 
 
   def rules
