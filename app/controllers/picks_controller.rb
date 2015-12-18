@@ -107,6 +107,10 @@ class PicksController < ApplicationController
   def history
     render 'history' 
   end
+  
+  def tree
+    render 'tree'
+  end
 
 
   def rules

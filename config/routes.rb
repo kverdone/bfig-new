@@ -32,6 +32,10 @@ Bfig::Application.routes.draw do
   get 'rules' => "picks#rules"
   resources :picks, :except => [:destroy, :show, :edit, :index]
 
+  get 'tree' => "picks#tree"
+  get 'tree-radial' => "picks#tree_radial"
+  get 'tree-vertical' => "picks#tree_vertical"
+  get 'tree-elbow' => "picks#tree_elbow"
 
   devise_for :users
 
